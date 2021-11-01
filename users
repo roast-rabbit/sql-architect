@@ -1,0 +1,21 @@
+CREATE TABLE public.users (
+            	id INTEGER NOT NULL,
+            	name VARCHAR NOT NULL,
+            	CONSTRAINT user_id PRIMARY KEY (id)
+);
+
+
+CREATE TABLE public.comments (
+            	id INTEGER NOT NULL,
+            	id_user INTEGER NOT NULL,
+            	text VARCHAR NOT NULL,
+            	CONSTRAINT comment_id PRIMARY KEY (id, id_user)
+);
+
+
+ALTER TABLE public.comments ADD CONSTRAINT users_comments_fk
+FOREIGN KEY (id_user)
+REFERENCES public.users (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
